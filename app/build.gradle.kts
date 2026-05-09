@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -5,6 +7,11 @@ plugins {
     alias(libs.plugins.hilt)
 //    alias(libs.plugins.kotlin.compose)
 }
+
+
+val groqApiKey = Properties().apply {
+    load(rootProject.file("local.properties").inputStream())
+}.getProperty("GROQ_API_KEY")
 
 android {
     namespace = "com.example.vocalbridge"
@@ -28,6 +35,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+            "String",
+            "GROQ_API_KEY",
+            "\"$groqApiKey\""
+        )
     }
 
     buildTypes {
@@ -45,6 +58,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     composeOptions {
@@ -79,6 +93,8 @@ dependencies {
     ksp("com.google.dagger:hilt-compiler:2.51")
     // Hilt Navigation
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
