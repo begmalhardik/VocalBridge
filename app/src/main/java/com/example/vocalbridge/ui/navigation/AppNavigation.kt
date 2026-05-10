@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.vocalbridge.ui.screen.PracticeScreen
 
 @Composable
 fun AppNavigation() {
@@ -12,22 +13,22 @@ fun AppNavigation() {
 
     NavHost(
         navController = navController,
-        startDestination = "onboarding"
+        startDestination = "practice"
     ) {
-        composable("onboarding") {
-            // OnboardingScreen(navController)
-        }
-
-        composable("dashboard") {
-            // DashboardScreen(navController)
-        }
+//        composable("onboarding") {
+//            // OnboardingScreen(navController)
+//        }
+//
+//        composable("dashboard") {
+//            // DashboardScreen(navController)
+//        }
 
         composable("practice") {
-            // PracticeScreen()
+            PracticeScreen()
         }
 
-        composable("progress") {
-            // ProgressScreen()
-        }
+//        composable("progress") {
+//            // ProgressScreen()
+//        }
     }
 }
